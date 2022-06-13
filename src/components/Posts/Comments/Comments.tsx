@@ -145,7 +145,7 @@ const Comments: React.FC<CommentsProps> = ({
 
   useEffect(() => {
     if (selectedPost) getPostComments();
-  }, [selectedPost]);
+  }, [selectedPost, getPostComments]);
   return (
     <Box bg="white" borderRadius="0px 0px 4px 4px" p={2}>
       <Flex

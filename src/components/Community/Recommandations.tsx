@@ -112,6 +112,7 @@ const Recommandations: React.FC<RecommandationsProps> = () => {
                             borderRadius="full"
                             boxSize="28px"
                             mr={2}
+                            alt=""
                           />
                         ) : (
                           <Icon

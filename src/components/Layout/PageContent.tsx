@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react';
 import React from 'react';
 
 type PageContentProps = {
-  children?: React.ReactNode | null | undefined;
+  children: React.ReactNode;
 };
 
 const PageContent: React.FC<PageContentProps> = ({ children }) => {

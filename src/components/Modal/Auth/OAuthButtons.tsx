@@ -19,7 +19,7 @@ const OAuthButtons: React.FC<OAuthButtonsProps> = () => {
 
   useEffect(() => {
     if (userCred) createUserDocument(userCred.user);
-  }, [userCred]);
+  }, [userCred, createUserDocument]);
 
   return (
     <Flex direction="column" width="100%" mb={4}>

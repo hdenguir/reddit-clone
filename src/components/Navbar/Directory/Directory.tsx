@@ -39,6 +39,7 @@ const Directory: React.FC = () => {
                 borderRadius="full"
                 boxSize="24px"
                 mr={4}
+                alt=""
               />
             ) : (
               <Icon
