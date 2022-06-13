@@ -10,7 +10,7 @@ import {
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { CommunityState } from '../atoms/communitiesAtom';
 import { Post, postState, PostVote } from '../atoms/postsAtom';
 import CreatePostLink from '../components/Community/CreatePostLink';
@@ -111,23 +111,24 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (snippetsFetched) buildUserHomeFeed();
-  }, [snippetsFetched, buildUserHomeFeed]);
+  }, [snippetsFetched]);
 
   useEffect(() => {
     if (!user && !loadingUser) {
       buildNoUserHomeFeed();
     }
-  }, [user, loadingUser, buildNoUserHomeFeed]);
+  }, [user, loadingUser]);
 
   useEffect(() => {
     if (user && postStateValue.posts.length) getUserPostVotes();
+
     return () => {
       setPostStateValue((prev) => ({
         ...prev,
         postVotes: [],
       }));
     };
-  }, [user, postStateValue.posts, getUserPostVotes, setPostStateValue]);
+  }, [user, postStateValue.posts]);
 
   return (
     <PageContent>
