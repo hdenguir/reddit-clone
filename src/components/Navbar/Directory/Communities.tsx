@@ -13,6 +13,8 @@ const Communities: React.FC<CommunitiesProps> = () => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const mySnippets = useRecoilValue(CommunityState).mySnippets;
+  console.log({ sp: mySnippets.filter((s) => s.isModerator) });
+
   return (
     <>
       <CreateCommunityModal open={open} handleClose={handleClose} />
@@ -20,20 +22,19 @@ const Communities: React.FC<CommunitiesProps> = () => {
         <Text pl={1} fontSize="10pt" fontWeight={500} color="gray.500">
           MODERATING
         </Text>
-        {mySnippets
-          .filter((s) => s.isModerator)
-          .map((snippet) => (
-            <>
+        {mySnippets.length > 0 &&
+          mySnippets
+            .filter((s) => s.isModerator)
+            .map((snippet) => (
               <MenuListItem
-                key={snippet.communityId}
+                key={`${snippet.communityId}- ${Date.now()}`}
                 displayText={`r/${snippet.communityId}`}
                 link={`/r/${snippet.communityId}`}
                 imageURL={snippet.imageURL}
                 icon={FaReddit}
                 iconColor="blue.500"
               />
-            </>
-          ))}
+            ))}
       </Box>
       <Box mt={3} mr={4}>
         <Text pl={1} fontSize="10pt" fontWeight={500} color="gray.500">
@@ -51,18 +52,21 @@ const Communities: React.FC<CommunitiesProps> = () => {
             Create Community
           </Flex>
         </MenuItem>
-        {mySnippets.map((snippet) => (
-          <>
-            <MenuListItem
-              key={snippet.communityId}
-              displayText={`r/${snippet.communityId}`}
-              link={`/r/${snippet.communityId}`}
-              imageURL={snippet.imageURL}
-              icon={FaReddit}
-              iconColor="blue.500"
-            />
-          </>
-        ))}
+        {mySnippets.length &&
+          mySnippets
+            .filter((s) => !s.isModerator)
+            .map((snippet) => (
+              <>
+                <MenuListItem
+                  key={snippet.communityId}
+                  displayText={`r/${snippet.communityId}`}
+                  link={`/r/${snippet.communityId}`}
+                  imageURL={snippet.imageURL}
+                  icon={FaReddit}
+                  iconColor="blue.500"
+                />
+              </>
+            ))}
       </Box>
     </>
   );
